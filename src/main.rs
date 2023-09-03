@@ -18,8 +18,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     let app = App::new();
 
     let current_page = UIPage::Providers;
+    let focused: bool = false;
+    // let provider: ProviderForm = ProviderForm { provider_name: "AWS".to_string(), current_index: Some(0), fields:  vec!["Source", "Version", "Required Version", "Region", "Resource Type", "Resource Name", "AMI", "Instance Type", "Tags Name"], state: ListState::default() };
 
-    run(&mut terminal, app, current_page)?;
+    run(&mut terminal, app, current_page, focused)?;
 
     // restore terminal
     disable_raw_mode()?;

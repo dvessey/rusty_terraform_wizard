@@ -58,16 +58,39 @@ impl<T> Providers<T> {
 
     pub fn select(&mut self) -> ProviderForm {
         let i = self.state.selected().unwrap();
-        let provider: &str = match i  {
-                        0 => "AWS",
-                        1 => "GOOGLE",
-                        2 => "AZURE",
-                        3 => "DOCKER",
-                        _ => "None",
-                    };
-        let provider_form = ProviderForm {
-            provider_name: provider.to_string(),
+        let provider: &str = match i {
+            0 => "AWS",
+            1 => "GOOGLE",
+            2 => "AZURE",
+            3 => "DOCKER",
+            _ => "None",
         };
-        ProviderForm { provider_name: provider_form.provider_name }
+
+        let fields: Vec<&str> = match provider {
+            "AWS" => {
+                vec!["Source", "Version", "Required Version", "Region", "Resource Type", "Resource Name", "AMI", "Instance Type", "Tags Name"]
+            },
+            _ => vec![]
+        };
+
+        // let provider_form = ProviderForm {
+        //     provider_name: provider.to_string(),
+        //     current_index: None,
+        //     fields,
+        //     state: ListState::default(),
+            
+        // };
+        // ProviderForm {
+        //     provider_name: provider_form.provider_name,
+        //     current_index: provider_form.current_index,
+        //     fields: provider_form.fields,
+        //     state: provider_form.state,
+        // }
+        ProviderForm {
+            provider_name: provider.to_string(),
+            current_index: None,
+            fields,
+            state: ListState::default(),
+        }
     }
 }
